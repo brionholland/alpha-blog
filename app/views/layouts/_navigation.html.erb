@@ -34,6 +34,20 @@
         <a class="nav-link" <%= link_to 'Sign Up', signup_path %></a>
         
       <% end %>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" <%= link_to "All Categories", categories_path %></a>
+          <div class="dropdown-divider"></div>
+            <% Category.all.each do |category| %>
+              <a class="dropdown-item" <%= link_to "#{category.name}", category_path(category) %></a>
+            <%end%>
+          <div class="dropdown-divider"></div>
+            <% if logged_in? and current_user.admin %>
+              <a class="dropdown-item" <%= link_to "Create New Category", new_category_path %></a>
+            <%end%>
+        </div>
+      </li>
       
     </ul>
     <form class="form-inline my-2 my-lg-0">
